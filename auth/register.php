@@ -11,6 +11,9 @@
     <div class="register-container">
       <div class="register-box">
         <div class="register-title">
+          <div class="role-icon">
+            <img src="../assets/images/LogoOnly.png" alt="Logo">
+          </div>
           <h1>REGISTER TO WE-KONEK</h1>
           <p class="register-subtitle">STUDENT REGISTRATION</p>
         </div>
