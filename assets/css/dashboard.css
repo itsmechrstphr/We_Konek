@@ -1,5 +1,5 @@
 /**
- * We Konek - Dashboard Component Styles
+ * We Konek - Dashboard Component Styles (Optimized)
  * 
  * Path: assets/css/dashboard.css
  * 
@@ -18,7 +18,7 @@
   min-height: calc(100vh - var(--header-height));
   width: calc(100% - var(--sidebar-collapsed-width));
   transition: margin-left var(--transition-base), width var(--transition-base);
-  max-width: 1600px;
+  max-width: 100%; /* Changed from 1600px to 100% */
 }
 
 /* Desktop: Sidebar hover state */
@@ -49,7 +49,7 @@
 }
 
 .section-title i {
-  color: var(--primary-color);
+  color: #FFD326;
   font-size: 1.25rem;
 }
 
@@ -63,9 +63,9 @@
   align-items: center;
   margin-bottom: var(--spacing-2xl);
   padding: var(--spacing-xl);
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+  background: linear-gradient(135deg, #FFD326 0%, #FFC107 100%);
   border-radius: var(--radius-xl);
-  color: white;
+  color: #1a1a1a;
   box-shadow: var(--shadow-lg);
 }
 
@@ -91,9 +91,10 @@
   gap: var(--spacing-sm);
   font-size: 0.9375rem;
   padding: var(--spacing-sm) var(--spacing-md);
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(26, 26, 26, 0.15);
   border-radius: var(--radius-md);
   backdrop-filter: blur(10px);
+  color: #1a1a1a;
 }
 
 .welcome-date i {
@@ -110,9 +111,34 @@
 
 .quick-actions-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(5, 1fr); /* Fixed 5 columns on large screens */
   gap: var(--spacing-lg);
   transition: grid-template-columns var(--transition-base);
+}
+
+/* Responsive breakpoints for quick actions */
+@media (max-width: 1400px) {
+  .quick-actions-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1024px) {
+  .quick-actions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .quick-actions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .quick-actions-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .action-btn {
@@ -139,7 +165,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+  background: linear-gradient(135deg, #FFD326 0%, #FFC107 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -149,7 +175,7 @@
 }
 
 .action-btn:hover {
-  border-color: var(--primary-color);
+  border-color: #FFD326;
   transform: translateY(-4px);
   box-shadow: var(--shadow-xl);
 }
@@ -160,7 +186,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+  background: linear-gradient(135deg, #FFD326 0%, #FFC107 100%);
   border-radius: var(--radius-lg);
   transition: all 0.3s ease;
   position: relative;
@@ -174,12 +200,12 @@
 
 .action-icon-wrapper i {
   font-size: 1.75rem;
-  color: white;
+  color: #1a1a1a;
   transition: color 0.3s ease;
 }
 
 .action-btn:hover .action-icon-wrapper i {
-  color: var(--primary-color);
+  color: #FFD326;
 }
 
 .action-text {
@@ -193,7 +219,7 @@
 }
 
 .action-btn:hover .action-text {
-  color: white;
+  color: #1a1a1a;
 }
 
 /* ==========================================
@@ -284,6 +310,19 @@
   transition: grid-template-columns var(--transition-base);
 }
 
+/* Optimize announcements grid for larger screens */
+@media (min-width: 1800px) {
+  .announcements-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1799px) {
+  .announcements-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .announcement-card {
   background-color: var(--bg-secondary);
   border-radius: var(--radius-lg);
@@ -301,7 +340,7 @@
   left: 0;
   width: 4px;
   height: 100%;
-  background: var(--primary-color);
+  background: #FFD326;
   border-radius: var(--radius-lg) 0 0 var(--radius-lg);
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -314,7 +353,7 @@
 .announcement-card:hover {
   box-shadow: var(--shadow-lg);
   transform: translateY(-4px);
-  border-color: var(--primary-color);
+  border-color: #FFD326;
 }
 
 .announcement-header {
@@ -345,8 +384,8 @@
 }
 
 .badge-suspension {
-  background-color: #fee2e2;
-  color: #991b1b;
+  background-color: #FFD326;
+  color: #1a1a1a;
 }
 
 .badge-checkup {
@@ -355,8 +394,8 @@
 }
 
 .badge-report {
-  background-color: #fef3c7;
-  color: #92400e;
+  background-color: #FFD326;
+  color: #1a1a1a;
 }
 
 .announcement-description {
@@ -402,20 +441,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+  background: linear-gradient(135deg, #FFD326 0%, #FFC107 100%);
   border-radius: var(--radius-lg);
   flex-shrink: 0;
 }
 
 .department-icon i {
   font-size: 1.5rem;
-  color: white;
+  color: #1a1a1a;
 }
 
 .department-title {
   font-size: 1.375rem;
   font-weight: 700;
-  color: var(--primary-color);
+  color: #1a1a1a;
   margin-bottom: 0.25rem;
   line-height: 1.2;
 }
@@ -460,9 +499,9 @@
 
 .schedule-table td.time-slot {
   font-weight: 600;
-  color: var(--primary-color);
+  color: #1a1a1a;
   white-space: nowrap;
-  background-color: var(--bg-tertiary);
+  background: linear-gradient(135deg, #FFD326 0%, #FFC107 100%);
 }
 
 .schedule-table small {
@@ -722,8 +761,8 @@
 .form-select:focus,
 .form-textarea:focus {
   outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(34, 91, 19, 0.1);
+  border-color: #FFD326;
+  box-shadow: 0 0 0 3px rgba(255, 211, 38, 0.2);
 }
 
 .form-textarea {
@@ -746,12 +785,12 @@
 }
 
 .btn-primary {
-  background-color: var(--primary-color);
-  color: white;
+  background: linear-gradient(135deg, #FFD326 0%, #FFC107 100%);
+  color: #1a1a1a;
 }
 
 .btn-primary:hover {
-  background-color: var(--primary-hover);
+  background: linear-gradient(135deg, #FFC107 0%, #FFB300 100%);
   transform: translateY(-1px);
   box-shadow: var(--shadow-md);
 }
@@ -812,14 +851,6 @@
   .welcome-title {
     font-size: 1.75rem;
   }
-
-  .quick-actions-grid {
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  }
-
-  .announcements-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  }
 }
 
 @media (max-width: 768px) {
@@ -844,7 +875,6 @@
   }
 
   .quick-actions-grid {
-    grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-md);
   }
 
@@ -953,10 +983,6 @@
     padding: var(--spacing-xs) var(--spacing-sm);
   }
 
-  .quick-actions-grid {
-    grid-template-columns: 1fr;
-  }
-  
   .action-btn {
     min-height: 100px;
   }
@@ -1022,5 +1048,499 @@
 }
 
 .dashboard-container::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-color);
+  background: #FFD326;
+}
+
+/* ==========================================
+   USER MANAGEMENT - MODERN TABLE DESIGN
+   Add these styles to the end of dashboard.css
+   ========================================== */
+
+/* Management Header */
+.management-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.management-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.management-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+}
+
+/* Action Buttons */
+.action-btn-search,
+.action-btn-filter,
+.action-btn-add {
+    padding: 0.75rem 1.25rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.action-btn-search {
+    background: #FFD326;
+    color: #1a1a1a;
+}
+
+.action-btn-search:hover {
+    background: #FFC107;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 211, 38, 0.3);
+}
+
+.action-btn-filter {
+    background: #FFD326;
+    color: #1a1a1a;
+}
+
+.action-btn-filter:hover {
+    background: #FFC107;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 211, 38, 0.3);
+}
+
+.action-btn-add {
+    background: linear-gradient(135deg, #2c5f2d 0%, #1e4620 100%);
+    color: #fff;
+}
+
+.action-btn-add:hover {
+    background: linear-gradient(135deg, #1e4620 0%, #0f2910 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(44, 95, 45, 0.4);
+}
+
+/* Filters Panel */
+.filters-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, margin-bottom 0.3s ease;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.filters-panel.active {
+    max-height: 200px;
+    margin-bottom: 1.5rem;
+}
+
+.filters-panel .filter-group {
+    padding: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filters-panel .search-input,
+.filters-panel .filter-select {
+    padding: 0.75rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    background-color: #fff;
+}
+
+.filters-panel .search-input {
+    flex: 1;
+    min-width: 250px;
+}
+
+.filters-panel .search-input:focus,
+.filters-panel .filter-select:focus {
+    outline: none;
+    border-color: #FFD326;
+    box-shadow: 0 0 0 3px rgba(255, 211, 38, 0.1);
+}
+
+.filters-panel .filter-select {
+    min-width: 180px;
+    cursor: pointer;
+}
+
+/* Staff Table Container */
+.staff-table-container {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Staff Table */
+.staff-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.staff-table thead {
+    background: linear-gradient(135deg, #2c5f2d 0%, #1e4620 100%);
+}
+
+.staff-table thead th {
+    padding: 1.25rem 1.5rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+}
+
+.staff-table tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.2s ease;
+}
+
+.staff-table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.staff-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.staff-table tbody td {
+    padding: 1.25rem 1.5rem;
+    font-size: 0.9rem;
+    color: #333;
+    vertical-align: middle;
+}
+
+.staff-table tbody td.user-id-cell {
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+/* Role Badges */
+.role-badge {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.role-student {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.role-faculty {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+/* Status Badges - Updated */
+.staff-table .status-badge {
+    display: inline-block;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.staff-table .status-active {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.staff-table .status-inactive {
+    background: #ffebee;
+    color: #c62828;
+}
+
+/* Action Buttons in Table */
+.staff-table .actions-cell {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.action-btn-edit,
+.action-btn-delete {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+}
+
+.action-btn-edit {
+    background: #FFD326;
+    color: #1a1a1a;
+}
+
+.action-btn-edit:hover {
+    background: #FFC107;
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(255, 211, 38, 0.3);
+}
+
+.action-btn-delete {
+    background: #dc2626;
+    color: #fff;
+}
+
+.action-btn-delete:hover {
+    background: #b91c1c;
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.3);
+}
+
+/* Modal Styles - Enhanced */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-content {
+    background: #fff;
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 550px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.3s ease;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.75rem 2rem;
+    border-bottom: 2px solid #e0e0e0;
+    background: linear-gradient(135deg, #2c5f2d 0%, #1e4620 100%);
+    border-radius: 16px 16px 0 0;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: 700;
+}
+
+.modal .close {
+    font-size: 1.75rem;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    line-height: 1;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    padding: 0.25rem 0.5rem;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.modal .close:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.modal form {
+    padding: 2rem;
+}
+
+.modal .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.modal .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.modal .form-group input,
+.modal .form-group select {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    background-color: #fff;
+}
+
+.modal .form-group input:focus,
+.modal .form-group select:focus {
+    outline: none;
+    border-color: #FFD326;
+    box-shadow: 0 0 0 3px rgba(255, 211, 38, 0.1);
+}
+
+.modal .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid #e0e0e0;
+}
+
+.modal .btn-primary,
+.modal .btn-secondary {
+    padding: 0.875rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal .btn-primary {
+    background: linear-gradient(135deg, #2c5f2d 0%, #1e4620 100%);
+    color: #fff;
+}
+
+.modal .btn-primary:hover {
+    background: linear-gradient(135deg, #1e4620 0%, #0f2910 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(44, 95, 45, 0.3);
+}
+
+.modal .btn-secondary {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.modal .btn-secondary:hover {
+    background: #d0d0d0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .management-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .management-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .filters-panel .filter-group {
+        flex-direction: column;
+    }
+    
+    .filters-panel .search-input,
+    .filters-panel .filter-select {
+        width: 100%;
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .staff-table-container {
+        overflow-x: auto;
+    }
+    
+    .staff-table {
+        min-width: 700px;
+    }
+    
+    .management-title {
+        font-size: 1.5rem;
+    }
+    
+    .action-btn-search,
+    .action-btn-filter,
+    .action-btn-add {
+        padding: 0.65rem 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+    
+    .modal form {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .management-header {
+        padding: 1rem;
+    }
+    
+    .management-title {
+        font-size: 1.25rem;
+    }
+    
+    .management-actions {
+        flex-wrap: wrap;
+    }
+    
+    .action-btn-search,
+    .action-btn-filter,
+    .action-btn-add {
+        flex: 1;
+        min-width: calc(50% - 0.375rem);
+        justify-content: center;
+    }
+    
+    .staff-table thead th,
+    .staff-table tbody td {
+        padding: 1rem;
+        font-size: 0.8rem;
+    }
+    
+    .modal-header {
+        padding: 1.25rem 1.5rem;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.25rem;
+    }
 }

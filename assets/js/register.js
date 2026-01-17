@@ -50,6 +50,10 @@ class RegisterForm {
 
     const captchaInput = document.getElementById('captchaInput');
     captchaInput.addEventListener('input', () => this.clearCaptchaError());
+
+    // Password strength real-time validation
+    const passwordInput = this.form.querySelector('input[name="password"]');
+    passwordInput.addEventListener('input', (e) => this.checkPasswordStrength(e.target.value));
   }
 
   disableStudentNoInitially() {
@@ -112,6 +116,122 @@ class RegisterForm {
     }
   }
 
+  /**
+   * Enhanced password strength validation
+   * Requirements:
+   * - Minimum 8 characters
+   * - At least one uppercase letter
+   * - At least one lowercase letter
+   * - At least one number
+   * - At least one special character (!@#$%^&*()_+-=[]{}|;:,.<>?)
+   */
+  checkPasswordStrength(password) {
+    const strengthIndicator = document.getElementById('password-strength-indicator');
+    const strengthText = document.getElementById('password-strength-text');
+    const requirementsList = document.getElementById('password-requirements');
+
+    if (!password) {
+      if (strengthIndicator) {
+        strengthIndicator.className = 'strength-indicator';
+        strengthIndicator.style.width = '0%';
+      }
+      if (strengthText) strengthText.textContent = '';
+      this.updateRequirements(password);
+      return;
+    }
+
+    const requirements = {
+      length: password.length >= 8,
+      uppercase: /[A-Z]/.test(password),
+      lowercase: /[a-z]/.test(password),
+      number: /[0-9]/.test(password),
+      special: /[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/.test(password)
+    };
+
+    const metRequirements = Object.values(requirements).filter(Boolean).length;
+    let strength = 'weak';
+    let strengthPercentage = 0;
+
+    if (metRequirements === 5) {
+      strength = 'strong';
+      strengthPercentage = 100;
+    } else if (metRequirements >= 3) {
+      strength = 'medium';
+      strengthPercentage = 60;
+    } else {
+      strength = 'weak';
+      strengthPercentage = 30;
+    }
+
+    if (strengthIndicator) {
+      strengthIndicator.className = `strength-indicator strength-${strength}`;
+      strengthIndicator.style.width = `${strengthPercentage}%`;
+    }
+
+    if (strengthText) {
+      const strengthLabels = {
+        weak: 'Weak',
+        medium: 'Medium',
+        strong: 'Strong'
+      };
+      strengthText.textContent = strengthLabels[strength];
+      strengthText.className = `strength-text strength-${strength}`;
+    }
+
+    this.updateRequirements(password);
+  }
+
+  updateRequirements(password) {
+    const requirements = {
+      'req-length': password.length >= 8,
+      'req-uppercase': /[A-Z]/.test(password),
+      'req-lowercase': /[a-z]/.test(password),
+      'req-number': /[0-9]/.test(password),
+      'req-special': /[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/.test(password)
+    };
+
+    Object.entries(requirements).forEach(([id, met]) => {
+      const element = document.getElementById(id);
+      if (element) {
+        if (met) {
+          element.classList.add('met');
+          element.classList.remove('unmet');
+        } else {
+          element.classList.remove('met');
+          element.classList.add('unmet');
+        }
+      }
+    });
+  }
+
+  validatePasswordStrength(password) {
+    if (!password) {
+      return { valid: false, message: 'Password is required' };
+    }
+
+    if (password.length < 8) {
+      return { valid: false, message: 'Password must be at least 8 characters long' };
+    }
+
+    if (!/[A-Z]/.test(password)) {
+      return { valid: false, message: 'Password must contain at least one uppercase letter' };
+    }
+
+    if (!/[a-z]/.test(password)) {
+      return { valid: false, message: 'Password must contain at least one lowercase letter' };
+    }
+
+    if (!/[0-9]/.test(password)) {
+      return { valid: false, message: 'Password must contain at least one number' };
+    }
+
+    if (!/[!@#$%^&*()_+\-=\[\]{}|;:,.<>?]/.test(password)) {
+      return { valid: false, message: 'Password must contain at least one special character (!@#$%^&*...)' };
+    }
+
+    return { valid: true, message: '' };
+  }
+
   getFormData() {
     const data = {};
     const inputs = this.form.querySelectorAll('input[data-field]');
@@ -155,12 +275,13 @@ class RegisterForm {
     if (!data.firstName) {
       this.setError('firstName', 'First name is required');
     }
-    if (!data.password) {
-      this.setError('password', 'Password is required');
+    
+    // Enhanced password validation
+    const passwordValidation = this.validatePasswordStrength(data.password);
+    if (!passwordValidation.valid) {
+      this.setError('password', passwordValidation.message);
     }
-    if (data.password && data.password.length < 6) {
-      this.setError('password', 'Password must be at least 6 characters');
-    }
+
     if (data.password !== data.confirmPassword) {
       this.setError('confirmPassword', 'Passwords do not match');
     }
@@ -191,7 +312,7 @@ class RegisterForm {
       const errorElement = document.getElementById('error-captcha');
       errorElement.textContent = 'Incorrect answer';
       captchaInput.classList.add('error');
-      this.refreshCaptcha(); // Refresh captcha on incorrect answer
+      this.refreshCaptcha();
     }
 
     return Object.keys(this.errors).length === 0 && captchaAnswer === correctAnswer.toString();
@@ -218,6 +339,16 @@ class RegisterForm {
       this.form.reset();
       this.formData = {};
 
+      // Reset password strength indicator
+      const strengthIndicator = document.getElementById('password-strength-indicator');
+      const strengthText = document.getElementById('password-strength-text');
+      if (strengthIndicator) {
+        strengthIndicator.className = 'strength-indicator';
+        strengthIndicator.style.width = '0%';
+      }
+      if (strengthText) strengthText.textContent = '';
+      this.updateRequirements('');
+
     } catch (error) {
       console.error('Registration error:', error);
       alert('Registration failed. Please try again.');
@@ -232,3 +363,112 @@ class RegisterForm {
 document.addEventListener('DOMContentLoaded', () => {
   new RegisterForm();
 });
+
+/* Add these styles to your register.css file */
+
+/* Password Strength Indicator Styles */
+const styles = `
+.password-field-container {
+  position: relative;
+}
+
+.strength-meter {
+  margin-top: 8px;
+}
+
+.strength-bar {
+  width: 100%;
+  height: 6px;
+  background-color: var(--gray-200);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.strength-indicator {
+  height: 100%;
+  transition: all 0.3s ease;
+  width: 0%;
+}
+
+.strength-indicator.strength-weak {
+  background-color: #dc2626;
+}
+
+.strength-indicator.strength-medium {
+  background-color: #f59e0b;
+}
+
+.strength-indicator.strength-strong {
+  background-color: #16a34a;
+}
+
+.strength-text {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: right;
+}
+
+.strength-text.strength-weak {
+  color: #dc2626;
+}
+
+.strength-text.strength-medium {
+  color: #f59e0b;
+}
+
+.strength-text.strength-strong {
+  color: #16a34a;
+}
+
+.password-requirements {
+  margin-top: 12px;
+  padding: 12px;
+  background-color: var(--gray-50);
+  border-radius: 6px;
+  border: 1px solid var(--gray-200);
+}
+
+.password-requirements h4 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.requirement-item {
+  font-size: 0.8rem;
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s ease;
+}
+
+.requirement-item::before {
+  content: '✗';
+  font-weight: bold;
+  width: 16px;
+  text-align: center;
+}
+
+.requirement-item.unmet {
+  color: var(--gray-600);
+}
+
+.requirement-item.unmet::before {
+  content: '✗';
+  color: #dc2626;
+}
+
+.requirement-item.met {
+  color: #16a34a;
+}
+
+.requirement-item.met::before {
+  content: '✓';
+  color: #16a34a;
+}
+`;

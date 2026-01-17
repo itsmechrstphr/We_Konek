@@ -1,0 +1,13 @@
+{
+    "name": "we-konek/academic-system",
+    "description": "WE_KONEK Academic Management System",
+    "require": {
+        "php": ">=7.4",
+        "phpoffice/phpspreadsheet": "^1.29"
+    },
+    "autoload": {
+        "psr-4": {
+            "WeKonek\\": "src/"
+        }
+    }
+}

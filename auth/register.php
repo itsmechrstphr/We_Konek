@@ -113,9 +113,28 @@
               <label>MIDDLE NAME</label>
               <input type="text" name="middleName" placeholder="Middle Name" data-field="middleName">
             </div>
-            <div class="form-group">
+            <div class="form-group password-field-container">
               <label>PASSWORD</label>
               <input type="password" name="password" placeholder="Enter your Password" data-field="password">
+              
+              <!-- Password Strength Indicator -->
+              <div class="strength-meter">
+                <div class="strength-bar">
+                  <div class="strength-indicator" id="password-strength-indicator"></div>
+                </div>
+                <div class="strength-text" id="password-strength-text"></div>
+              </div>
+              
+              <!-- Password Requirements -->
+              <div class="password-requirements" id="password-requirements">
+                <h4>Password Requirements:</h4>
+                <div class="requirement-item unmet" id="req-length">At least 8 characters</div>
+                <div class="requirement-item unmet" id="req-uppercase">One uppercase letter (A-Z)</div>
+                <div class="requirement-item unmet" id="req-lowercase">One lowercase letter (a-z)</div>
+                <div class="requirement-item unmet" id="req-number">One number (0-9)</div>
+                <div class="requirement-item unmet" id="req-special">One special character (!@#$%...)</div>
+              </div>
+              
               <span class="error-message" id="error-password"></span>
             </div>
           </div>

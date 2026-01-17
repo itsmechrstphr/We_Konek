@@ -37,8 +37,8 @@ switch ($userRole) {
     case 'super_admin':
         $navItems = [
             ['icon' => 'fa-home', 'text' => 'Dashboard', 'href' => 'super_admin_dashboard.php'],
-            ['icon' => 'fa-users', 'text' => 'User Management', 'href' => 'user_management.php'],
-            ['icon' => 'fa-graduation-cap', 'text' => 'Student Records', 'href' => 'student_records.php'],
+            ['icon' => 'fa-users-cog', 'text' => 'Manage Users', 'href' => 'manage_users.php'],
+            ['icon' => 'fa-check-circle', 'text' => 'Approvals', 'href' => 'approvals.php'],
             ['icon' => 'fa-chalkboard-teacher', 'text' => 'Faculty', 'href' => 'faculty.php'],
             ['icon' => 'fa-calendar-alt', 'text' => 'Schedules', 'href' => 'schedules.php'],
             ['icon' => 'fa-book', 'text' => 'Subjects', 'href' => 'subjects.php'],
@@ -51,6 +51,7 @@ switch ($userRole) {
     case 'admin':
         $navItems = [
             ['icon' => 'fa-home', 'text' => 'Dashboard', 'href' => 'admin_dashboard.php'],
+            ['icon' => 'fa-users-cog', 'text' => 'Manage Users', 'href' => 'manage_users.php'],
             ['icon' => 'fa-graduation-cap', 'text' => 'Students', 'href' => 'students.php'],
             ['icon' => 'fa-calendar-alt', 'text' => 'Schedules', 'href' => 'schedules.php'],
             ['icon' => 'fa-chart-bar', 'text' => 'Reports', 'href' => 'reports.php'],
